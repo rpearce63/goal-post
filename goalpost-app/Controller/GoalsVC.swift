@@ -14,13 +14,16 @@ let appDelegate = UIApplication.shared.delegate as? AppDelegate
 class GoalsVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var undoView: UIView!
     var goals :[Goal] = []
+    var removedGoals: [Goal] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isHidden = false
+//        undoView.isHidden = true
         
     }
 
@@ -39,12 +42,27 @@ class GoalsVC: UIViewController {
                     tableView.isHidden = true
                 }
             }
+            
         }
     }
     
     @IBAction func addGoalBtnWasPressed(_ sender: Any) {
         guard let createGoalVC = storyboard?.instantiateViewController(withIdentifier: "CreateGoalVC") else { return }
+        commitChanges()
+        undoView.isHidden = true
         presentDetail(createGoalVC)
+    }
+    
+    @IBAction func undoBtnPressed(_ sender: Any) {
+        undoRemove()
+        undoView.isHidden = true
+        fetchCoreDataObject()
+        tableView.reloadData()
+    }
+    
+    @IBAction func continueBtnPressed(_ sender: Any) {
+        commitChanges()
+        undoView.isHidden = true
     }
     
     
@@ -114,13 +132,9 @@ extension GoalsVC {
     
     func removeGoal(atIndexPath indexPath: IndexPath) {
         guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
+        //removedGoals.append(goals[indexPath.row])
         managedContext.delete(goals[indexPath.row])
-        do {
-            try managedContext.save()
-            print("Successfully removed goal")
-        } catch  {
-            debugPrint("Could not remove: \(error.localizedDescription)")
-        }
+        self.undoView.isHidden = false
     }
     
     func fetch(completion: (_ complete: Bool) -> ()) {
@@ -134,6 +148,24 @@ extension GoalsVC {
         } catch {
             debugPrint("Could not fetch: \(error.localizedDescription)")
             completion(false)
+        }
+    }
+    
+    func undoRemove() {
+        guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
+        
+        managedContext.rollback()
+       
+    }
+    
+    func commitChanges() {
+        guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
+        do {
+            try managedContext.save()
+            print("Successfully removed goal")
+            
+        } catch  {
+            debugPrint("Could not remove: \(error.localizedDescription)")
         }
     }
 }

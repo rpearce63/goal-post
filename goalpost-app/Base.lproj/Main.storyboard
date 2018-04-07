@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZA-hg-dT7">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZA-hg-dT7" userLabel="Header">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BNS-Xh-oog">
@@ -56,7 +56,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ImD-ec-89K">
-                                <rect key="frame" x="68" y="145" width="238.5" height="55"/>
+                                <rect key="frame" x="69" y="145" width="238.5" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Goalpost" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F72-8z-2a6">
                                         <rect key="frame" x="0.0" y="0.0" width="238.5" height="33"/>
@@ -181,9 +181,54 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Un-jp-iQV" userLabel="Undo View">
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal Removed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myr-d1-tjb">
+                                        <rect key="frame" x="8" y="18" width="117" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2b-dD-UEz">
+                                        <rect key="frame" x="201" y="12" width="92" height="36"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                                        <state key="normal" title="CONTINUE">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="continueBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="n8K-CB-kV1"/>
+                                            <action selector="undoBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EZN-mF-FEm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jBy-Aj-9Pg">
+                                        <rect key="frame" x="313" y="12" width="54" height="36"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                                        <state key="normal" title="UNDO">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="undoBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ASq-v5-1Pl"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="y2b-dD-UEz" firstAttribute="centerY" secondItem="4Un-jp-iQV" secondAttribute="centerY" id="3Dd-0K-MJD"/>
+                                    <constraint firstItem="jBy-Aj-9Pg" firstAttribute="leading" secondItem="y2b-dD-UEz" secondAttribute="trailing" constant="20" id="7d9-IT-q4z"/>
+                                    <constraint firstItem="myr-d1-tjb" firstAttribute="leading" secondItem="4Un-jp-iQV" secondAttribute="leading" constant="8" id="FOj-dd-Mbq"/>
+                                    <constraint firstAttribute="height" constant="60" id="GyX-EO-xrG"/>
+                                    <constraint firstAttribute="trailing" secondItem="jBy-Aj-9Pg" secondAttribute="trailing" constant="8" id="ODT-An-5JH"/>
+                                    <constraint firstItem="jBy-Aj-9Pg" firstAttribute="centerY" secondItem="4Un-jp-iQV" secondAttribute="centerY" id="X6O-A6-uEe"/>
+                                    <constraint firstItem="myr-d1-tjb" firstAttribute="centerY" secondItem="4Un-jp-iQV" secondAttribute="centerY" id="a0V-jq-4wi"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="4Un-jp-iQV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3ju-T1-Y2U"/>
+                            <constraint firstItem="4Un-jp-iQV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7BB-z5-6na"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4Un-jp-iQV" secondAttribute="bottom" id="9ve-Bg-hfC"/>
                             <constraint firstItem="VcL-Yj-dgQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Ede-Iz-6h5"/>
                             <constraint firstItem="EZA-hg-dT7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="EmJ-Ft-Fo8"/>
                             <constraint firstItem="VcL-Yj-dgQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="IKx-WE-Tte"/>
@@ -198,6 +243,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="VcL-Yj-dgQ" id="8KR-t9-tjW"/>
+                        <outlet property="undoView" destination="4Un-jp-iQV" id="bUS-UI-b1Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
